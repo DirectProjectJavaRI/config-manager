@@ -9,10 +9,11 @@
     <description>NHIN Direct Java configuration manager</description>
     <url>http://api.nhindirect.org/x/www/api.nhindirect.org/java/site/config/config-service-client/${project.version}</url> 
 	<parent>
-	   <groupId>org.springframework.boot</groupId>
-	   <artifactId>spring-boot-dependencies</artifactId>
-	   <version>2.1.0.RC1</version>
-	</parent>        
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.RELEASE</version>     
+		<relativePath />
+	</parent>	       
     <developers>
         <developer>
             <name>Greg Meyer</name>
@@ -33,7 +34,7 @@
     </licenses>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-cloud-dependencies.version>Greenwich.M1</spring-cloud-dependencies.version>		
+		<spring-cloud-dependencies.version>Greenwich.M2</spring-cloud-dependencies.version>		
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -97,82 +98,11 @@
 		          </execution>
 		        </executions>
 		      </plugin>  		
-		      <plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-dependency-plugin</artifactId>
-		        <executions>
-		          <execution>
-		            <id>copy</id>
-		            <phase>compile</phase>
-		            <goals>
-		              <goal>copy</goal>
-		            </goals>
-		            <configuration>
-		              <artifactItems>
-		                <artifactItem>
-		                  <groupId>org.nhind</groupId>
-		                  <artifactId>config-service</artifactId>
-		                  <version>1.5</version>
-		                  <type>war</type>
-		                  <overWrite>true</overWrite>
-		                  <destFileName>config-service.war</destFileName>
-		                </artifactItem>
-		              </artifactItems>
-		              <outputDirectory>
-		                ${project.basedir}/war
-		              </outputDirectory>
-		              <overWriteReleases>true</overWriteReleases>
-		              <overWriteSnapshots>true</overWriteSnapshots>
-		            </configuration>
-		          </execution>
-		        </executions>
-		      </plugin>	
-	      <plugin>
-	        <groupId>org.codehaus.mojo</groupId>
-	        <artifactId>appassembler-maven-plugin</artifactId>
-	        <version>1.3</version>        
-	        <executions>
-	          <execution>
-		        <configuration>
-		          <assembleDirectory>${project.build.directory}/appassembler/app/ConfigMgmtConsole</assembleDirectory>
-		          <repositoryName>lib</repositoryName>
-		          <repositoryLayout>flat</repositoryLayout>
-		          <extraJvmArguments>-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog -Dorg.apache.commons.logging.simplelog.defaultlog=error</extraJvmArguments>          
-		          <programs>
-		            <program>
-		              <mainClass>org.nhindirect.config.manager.ConfigManager</mainClass>
-		              <name>ConfigMgmtConsole</name>
-		            </program>
-		          </programs>
-	            </configuration>
-	            <goals>
-	              <goal>assemble</goal>              
-	            </goals>	            
-	          </execution>          
-	        </executions>
-	      </plugin>		
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.2</version>             
-            <executions>
-               <execution>           
-                  <phase>package</phase>
-                  <goals>
-                     <goal>single</goal>
-                  </goals>
-                  <configuration>                 
-                     <appendAssemblyId>false</appendAssemblyId>
-                     <includeModuleDirectory>false</includeModuleDirectory>
-                     <finalName>configTools-${project.version}</finalName>
-                     <descriptors>
-                        <descriptor>src/descriptors/distribution.xml</descriptor>
-                     </descriptors>
-                  </configuration>                    
-               </execution>                
-            </executions>
-         </plugin> 	            	
 			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>			
+			</plugin>
+ 			<plugin>
 				<groupId>com.atlassian.maven.plugins</groupId>
 				<artifactId>maven-clover2-plugin</artifactId>
 				<version>3.0.2</version>
