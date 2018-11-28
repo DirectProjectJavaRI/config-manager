@@ -3,7 +3,7 @@ package org.nhindirect.config.manager.printers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.nhindirect.config.model.Address;
 
 public class AddressPrinter extends AbstractRecordPrinter<Address>
