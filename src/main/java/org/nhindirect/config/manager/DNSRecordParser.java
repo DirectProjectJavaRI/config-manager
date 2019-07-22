@@ -31,6 +31,7 @@ import org.xbill.DNS.MXRecord;
 import org.xbill.DNS.NSRecord;
 import org.xbill.DNS.Name;
 import org.xbill.DNS.SOARecord;
+import org.xbill.DNS.SRVRecord;
 import org.xbill.DNS.TXTRecord;
 
 /**
@@ -76,6 +77,14 @@ public class DNSRecordParser
 		      "\r\n\t name: the name of the text entry" +
 		      "\r\n\t alias: the text value of the record" + 
 		      "\r\n\t ttl: time to live in seconds";
+	
+	public static final String PARSE_SRV_USAGE = "  name target port priority weight ttl" + 
+		      "\r\n\t name: the name of the SRV entry" +
+		      "\r\n\t target: the server that hosts the service of the SRV entry" +			
+		      "\r\n\t port: the IP port to use when conneting to the target" +			      
+		      "\r\n\t priority: the priority the record compared to other SRV records of the same name" + 
+		      "\r\n\t weight: the weight the record compared to other SRV records of the same name and priority" + 		      
+		      "\r\n\t ttl: time to live in seconds";	
 	
 	/**
 	 * Default empty constructor
@@ -230,4 +239,23 @@ public class DNSRecordParser
 	
 	    return new NSRecord(nameFromString(domainName), DClass.IN, ttl, nameFromString(target));
 	}	
+	
+	/**
+	 * Converts SRV record configuration information to an SRVRecord 
+	 * @param args The NS record configuration parameters.
+	 * @return A DNS NSRecord.
+	 * 
+	 * @since 6.0.1
+	 */		
+	public SRVRecord parseSRV(String[] args)
+	{        
+		String name = StringArrayUtil.getRequiredValue(args, 0);
+		String target = StringArrayUtil.getRequiredValue(args, 1);
+		int port = Integer.parseInt(StringArrayUtil.getRequiredValue(args, 2));
+		int priority = Integer.parseInt(StringArrayUtil.getRequiredValue(args, 3));
+		int weight = Integer.parseInt(StringArrayUtil.getRequiredValue(args, 4));
+	    int ttl = Integer.parseInt(StringArrayUtil.getRequiredValue(args, 5));
+	    
+	    return new SRVRecord(nameFromString(name), DClass.IN, ttl, priority, weight, port, nameFromString(target));
+	}		
 }

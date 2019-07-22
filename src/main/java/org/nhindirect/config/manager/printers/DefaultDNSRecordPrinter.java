@@ -99,6 +99,12 @@ public class DefaultDNSRecordPrinter implements DNSRecordPrinter
     		case Type.NS:
     			return "NS";	
     			
+    		case Type.CNAME:
+    			return "CNAME";	    			
+    			
+    		case Type.TXT:
+    			return "TXT";	 	
+    			
     		default:
     			return "Unknown";    		
     	}
@@ -151,6 +157,7 @@ public class DefaultDNSRecordPrinter implements DNSRecordPrinter
             case Type.NS:
             	print((NSRecord)toRecord(record));                                   
                 break;   
+                              
         }
         
         writer.flush();
