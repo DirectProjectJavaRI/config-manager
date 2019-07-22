@@ -118,6 +118,12 @@ public class DNSRecordCommands
     private static final String GET_ALL_USAGE = "Gets all records in the DNS store.";
     
     private static final String GET_SOA_CONTACTS = "Gets a list of all the different SOA contacts.";
+
+    private static final String ADD_SRV_USAGE = "Add a new SRV dns record." +
+        	"\r\n" + DNSRecordParser.PARSE_SRV_USAGE;
+
+        private static final String ENSURE_SRV_USAGE = "Adds a new SRV dns record if an identical one does't already exist. " +
+            "\r\n" + DNSRecordParser.PARSE_SRV_USAGE;
     
     private DNSRecordPrinter printer;
     private DNSRecordParser parser;
@@ -748,6 +754,39 @@ public class DNSRecordCommands
 	    
 	    return null;
 	}
+	
+	/**
+	 * Adds an SRV record to the configuration service.
+	 * @param args Contains the SRV record attributes.
+	 * 
+	 * @since 1.0
+	 */
+	@Command(name = "Dns_SRV_Add", usage = ADD_SRV_USAGE)
+	public void addSRV(String[] args)
+	{
+	    DNSRecord record = fromRecord(parser.parseSRV(args));
+		
+		addDNS(record);
+	}
+	
+	/**
+	 * Adds an SRV record to the configuration service only if the record does not exist.
+	 * @param args Contains the SRV record attributes.
+	 * 
+	 * @since 1.0
+	 */	
+	@Command(name = "Dns_SRV_Ensure", usage = ENSURE_SRV_USAGE)
+	public void ensureSRV(String[] args)
+	{
+	    DNSRecord record = fromRecord(parser.parseSRV(args));
+	    if (!verifyIsUnique(record, false))
+	    {
+	        return;
+	    }
+	    
+		
+		addDNS(record);
+	}	
 	
 	/*
 	 * prints the contents of an array of records
