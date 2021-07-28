@@ -1,4 +1,6 @@
-spring.banner.location: 'classpath:DirectProject.txt'
+spring:
+  banner:
+    location: 'classpath:DirectProject.txt'
 
 
 #Default the security credentials to call the config service. Override these
@@ -10,3 +12,7 @@ direct:
         user:
           name: admin
           password: d1r3ct;
+          
+  config:
+    service:
+      url: http://localhost:8080/config-service          

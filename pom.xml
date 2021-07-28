@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhind</groupId>
 	<artifactId>config-manager</artifactId>
-	<version>6.1-SNAPSHOT</version>
+	<version>8.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>NHIN Direct Java configuration manager</name>
     <description>NHIN Direct Java configuration manager</description>
@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.6.RELEASE</version>     
+		<version>2.5.2</version>     
 		<relativePath />
 	</parent>	
 	<scm>
@@ -28,7 +28,7 @@
         </developer>        
     </developers>
     <prerequisites>
-        <maven>3.0.0</maven>
+        <maven>3.5.0</maven>
     </prerequisites>  
     <licenses>
        <license>
@@ -38,7 +38,7 @@
     </licenses>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-cloud-dependencies.version>Greenwich.SR1</spring-cloud-dependencies.version>		
+		<spring-cloud-dependencies.version>2020.0.3</spring-cloud-dependencies.version>		
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -53,19 +53,23 @@
 	</dependencyManagement>		
 	<dependencies>
 		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>		
+		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>config-service-client</artifactId>
-			<version>6.0</version>			
+			<version>8.0.0-SNAPSHOT</version>			
 		</dependency>			
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-common</artifactId>
-			<version>6.0.1</version>					
+			<version>8.0.0-SNAPSHOT</version>					
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>agent</artifactId>
-			<version>6.0.2</version>					
+			<version>8.0.0-SNAPSHOT</version>					
 		</dependency>													
 	</dependencies>
 	<build>
@@ -88,9 +92,8 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
 				<configuration>
-				    <additionalparam>-Xdoclint:none</additionalparam>
+				    <additionalJOption>-Xdoclint:none</additionalJOption>
 					<charset>UTF-8</charset>
 					<docencoding>UTF-8</docencoding>
 					<docfilessubdirs>true</docfilessubdirs>
@@ -122,6 +125,7 @@
                     </goals>
                  </execution>
                </executions>
+               <version>3.0.1</version>
             </plugin>
             -->				
 		</plugins>
@@ -131,14 +135,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.9</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
 				<configuration>
-				    <additionalparam>-Xdoclint:none</additionalparam>
+				    <additionalJOption>-Xdoclint:none</additionalJOption>
 					<charset>UTF-8</charset>
 					<docencoding>UTF-8</docencoding>
 					<docfilessubdirs>true</docfilessubdirs>
@@ -162,6 +164,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
+				<version>3.1.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -183,15 +186,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</reporting>
-  	<repositories>
-	    <!-- Temp repository for Spring Boot Milestone -->
-        <repository>
-            <id>spring-milestone</id>
-            <name>Spring Milestone Releases</name>
-            <url>https://repo.spring.io/milestone/</url>
-        </repository>
-     </repositories>  
+	</reporting> 
 	<distributionManagement>
 		<site>
 			<id>nhind-site</id>

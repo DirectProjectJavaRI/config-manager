@@ -1,5 +1,6 @@
 package org.nhindirect.config.manager;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.nhind.config.rest.DomainService;
@@ -14,6 +15,8 @@ public class DomainCommands
 {
     private static final String LIST_DOMAINS_USAGE = "Lists domains in the system";
 	
+    private static final String GET_DOMAINS_USAGE = "Gets domain's infomation on the system.  The domain name must be an exact match";
+    
     private static final String ADD_DOMAIN_USAGE = "Adds a domain to the system." +
     		"\r\n  domainName postmasterEmail " +
             "\r\n\t domainName: The name of the new domain." +
@@ -56,6 +59,33 @@ public class DomainCommands
 		}
 
     }
+	
+	
+	@Command(name = "GetDomain", usage = GET_DOMAINS_USAGE)
+    public void getDomain(String[] args)
+    {
+		final String domainName = StringArrayUtil.getRequiredValue(args, 0);
+		
+		// get them all
+		try
+		{
+			final Domain domain = domainService.getDomain(domainName);
+			if (domain == null)
+			{
+				System.out.println("Domain " + domainName + " is not in the system.");
+				return;
+			}
+			
+			domainPrinter.printRecords(Arrays.asList(domain));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			System.err.println("Failed to retrieve domains: " + e.getMessage());
+		}
+
+    }
+	
 	
 	@Command(name = "AddDomain", usage = ADD_DOMAIN_USAGE)
     public void addDomain(String[] args)
