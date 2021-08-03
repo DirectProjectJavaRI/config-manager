@@ -25,7 +25,7 @@ public class AddressCommands
 	}  
 	
 	@Command(name = "ListAddressesByDomain", usage = LIST_ADDRESSES_BY_DOMAIN)
-    public void listCerts(String[] args)
+    public void listAddresesByDomain(String[] args)
 	{
 		
 		String domain = StringArrayUtil.getRequiredValue(args, 0);

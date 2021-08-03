@@ -13,10 +13,12 @@ import org.nhind.config.rest.TrustBundleService;
 import org.nhindirect.common.tooling.Commands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@SpringBootApplication
+@SpringBootApplication(exclude= {R2dbcAutoConfiguration.class})
 public class ConfigManager implements CommandLineRunner
 {
 	@Autowired
@@ -55,7 +57,7 @@ public class ConfigManager implements CommandLineRunner
 	 */
     public static void main(String[] args) 
     {
-        SpringApplication.run(ConfigManager.class, args);
+        new SpringApplicationBuilder(ConfigManager.class).web(WebApplicationType.NONE).run(args);
     }	
     
     public void run(String... args)
@@ -120,6 +122,9 @@ public class ConfigManager implements CommandLineRunner
 		commands.register(new TrustBundleCommands(bundleService, domainService));
 	
 		commands.register(new AddressCommands(addressService));	
+		
+		commands.register(new PerformanceCommands(anchorService, domainService, certService, 
+			 certPolicyService, settingService, dnsService, addressService, bundleService));
 		
         if (args != null && args.length > 0)
         {

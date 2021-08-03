@@ -294,12 +294,11 @@ public class CertCommands
 
 		try
 		{
-			
-			final Certificate cert = certService.getCertificatesByOwnerAndThumbprint("", tp);
+			final Certificate cert = certService.getCertificatesByOwnerAndThumbprint(" ", tp);
 			
 			if (cert == null)
 			{
-				System.out.println("Certificate with thumbprint." + tp + " cannot be found in the system");
+				System.out.println("Certificate with thumbprint " + tp + " cannot be found in the system");
 				return;
 			}
 			
