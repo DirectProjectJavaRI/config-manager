@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhind</groupId>
 	<artifactId>config-manager</artifactId>
-	<version>8.0.0</version>
+	<version>8.0.1</version>
 	<packaging>jar</packaging>
 	<name>NHIN Direct Java configuration manager</name>
     <description>NHIN Direct Java configuration manager</description>
@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>config-service-client</artifactId>
-			<version>8.0.0</version>			
+			<version>8.0.1</version>			
 		</dependency>			
 		<dependency>
 			<groupId>org.nhind</groupId>
