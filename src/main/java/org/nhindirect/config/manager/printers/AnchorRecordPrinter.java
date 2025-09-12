@@ -3,11 +3,11 @@ package org.nhindirect.config.manager.printers;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Vector;
+import javax.security.auth.x500.X500Principal;
 
-import org.bouncycastle.asn1.x509.X509Name;
-import org.bouncycastle.jce.PrincipalUtil;
-import org.bouncycastle.jce.X509Principal;
+import org.bouncycastle.asn1.x500.RDN;
+import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.nhindirect.common.cert.Thumbprint;
 import org.nhindirect.config.model.Anchor;
 import org.nhindirect.config.model.utils.CertUtils;
@@ -49,9 +49,9 @@ public class AnchorRecordPrinter extends AbstractRecordPrinter<Anchor>
 			final X509Certificate anchor = CertUtils.toX509Certificate(record.getCertificateData());
 			if (column.header.equals(ANCHOR_NAME_COL))
 			{
-				final X509Principal principal = PrincipalUtil.getSubjectX509Principal(anchor);
-				final Vector<?> values = principal.getValues(X509Name.CN);
-				final String cn = (String) values.get(0);
+				final X500Name principal = new X500Name(anchor.getSubjectX500Principal().getName(X500Principal.RFC2253));
+				final RDN[] values = principal.getRDNs(BCStyle.CN);
+				final String cn = values[0].getFirst().getValue().toString();
 				
 				return cn;
 			}
