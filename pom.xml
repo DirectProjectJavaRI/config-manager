@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>     
+		<version>4.0.1</version>     
 		<relativePath />
 	</parent>	
 	<scm>
@@ -38,7 +38,7 @@
     </licenses>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-cloud-dependencies.version>2025.0.0</spring-cloud-dependencies.version>		
+		<spring-cloud-dependencies.version>2025.1.0</spring-cloud-dependencies.version>		
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -51,25 +51,7 @@
 			</dependency>		
 		</dependencies>
 	</dependencyManagement>		
-	<dependencies>
-		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.bouncycastle</groupId>
-					<artifactId>bcprov-jdk15on</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.bouncycastle</groupId>
-					<artifactId>bcmail-jdk15on</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.bouncycastle</groupId>
-					<artifactId>bcpkix-jdk15on</artifactId>
-				</exclusion>
-			</exclusions>			    
-		</dependency>		
+	<dependencies>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>config-service-client</artifactId>
