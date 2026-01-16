@@ -118,7 +118,6 @@ public class PolicyCommands
 
 	}		
 	
-	@SuppressWarnings("deprecation")
 	@Command(name = "ImportPolicy", usage = IMPORT_POLICY_USAGE)
     public void importPolicy(String[] args)
 	{

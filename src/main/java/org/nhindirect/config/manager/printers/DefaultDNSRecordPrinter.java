@@ -214,7 +214,7 @@ public class DefaultDNSRecordPrinter implements DNSRecordPrinter
             return;
         }
 
-        this.print("Alias value", body.getAlias().toString());
+        this.print("Alias value", body.getName().toString());
     }
     
     /*
@@ -283,7 +283,7 @@ public class DefaultDNSRecordPrinter implements DNSRecordPrinter
 		if (cert instanceof X509Certificate) // may not be an X509Cert
 		{
 			X509Certificate xcert = (X509Certificate)cert;
-			print("Certificate Subject", xcert.getSubjectDN().getName());			
+			print("Certificate Subject", xcert.getSubjectX500Principal().getName());			
 		}
     }
     
