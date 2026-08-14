@@ -5,11 +5,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Vector;
 
-import org.bouncycastle.asn1.x509.X509Name;
-import org.bouncycastle.jce.PrincipalUtil;
-import org.bouncycastle.jce.X509Principal;
+import javax.security.auth.x500.X500Principal;
+
+import org.bouncycastle.asn1.x500.RDN;
+import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.nhindirect.config.model.TrustBundleAnchor;
 import org.nhindirect.stagent.cert.Thumbprint;
 
@@ -48,9 +49,9 @@ public class BundleAnchorRecordPrinter extends AbstractRecordPrinter<TrustBundle
 			final X509Certificate anchor = record.getAsX509Certificate();
 			if (column.header.equals(ANCHOR_NAME_COL))
 			{
-				final X509Principal principal = PrincipalUtil.getSubjectX509Principal(anchor);
-				final Vector<?> values = principal.getValues(X509Name.CN);
-				final String cn = (String) values.get(0);
+				final X500Name principal = new X500Name(anchor.getSubjectX500Principal().getName(X500Principal.RFC2253));
+				final RDN[] values = principal.getRDNs(BCStyle.CN);
+				final String cn = values[0].getFirst().getValue().toString();
 				
 				return cn;
 			}

@@ -1,7 +1,9 @@
 spring:
   banner:
     location: 'classpath:DirectProject.txt'
-
+  main:
+    allow-bean-definition-overriding: true
+    log-startup-info: false
 
 #Default the security credentials to call the config service. Override these
 #for your deployment.
@@ -15,4 +17,4 @@ direct:
           
   config:
     service:
-      url: http://localhost:8080/config-service          
+      url: http://localhost:8082/       
